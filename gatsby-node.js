@@ -18,6 +18,10 @@ exports.createPages = async ({graphql, actions}) => {
     }
   }`)
 
+  /**
+   * Basic example that adds widgets manually. Widgets are added the same way
+   * the page component is added
+   */
   actions.createPage({
     path: '/',
     component: path.resolve(__dirname, 'src/templates/Homepage.js'),
@@ -27,6 +31,12 @@ exports.createPages = async ({graphql, actions}) => {
     }
   })
 
+  /**
+   * More advanced example that generated posts. The widget-paths are created
+   * by our field-extension defined in 'createSchemaCustomization'
+   * These widget paths are mapped to react components that are accessible in
+   * the page-component
+   */
   gq.data.posts.nodes.forEach(node => actions.createPage({
     path: `/posts/${node.slug}`,
     component: path.resolve(__dirname, 'src/templates/Post.js'),
@@ -35,6 +45,10 @@ exports.createPages = async ({graphql, actions}) => {
   }))
 }
 
+/**
+ * I've create an helper resolver for the widget paths. That way
+ * I don't have to calculate the widgets each time (WidgetPaths)
+ */
 exports.createSchemaCustomization = ({ actions, cache }) => {
   const { createFieldExtension, createTypes } = actions
   createFieldExtension({
