@@ -48,6 +48,19 @@ export default function Homepage ({widgets}) {
         <li><Link to='/posts/post-1'>Post 1</Link></li>
         <li><Link to='/posts/post-2'>Post 2</Link></li>
       </ul>
+
+      <p>
+        If you inspect the network you can see, that all widgets that are used by my
+        posts are injected with a preload flag. that is done similar than gatsby preloads
+        pages. When you click on a post the post will only render when all widgets are
+        fetched --- just like page-components
+      </p>
+
+      <p>
+        Some interresting feature that is missing is, that we could enable "widget-queries"
+        just like normal page queries. That could be a killer feature because it could enable
+        dyamic queries deep within your component tree.<br/>
+      </p>
     </Wrapper>
   )
 }
@@ -57,4 +70,7 @@ const Wrapper = styled.div`
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  p {
+    font-size: 18px;
+  }
 `
