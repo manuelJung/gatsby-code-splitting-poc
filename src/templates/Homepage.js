@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import {Link} from 'gatsby'
 
 export default function Homepage ({widgets}) {
   return (
@@ -40,8 +41,13 @@ export default function Homepage ({widgets}) {
         That is an very basic example and won't happen in real apps. So let's get
         more realistic: We create some blog posts that can render custom components.
         I've created some posts under <b>src/cms/posts/[post].json</b>.
-        These posts are picked um by the graphql-layer and we create pages for each post.
+        These posts are picked um by the graphql-layer and we create pages for each post:
       </p>
+
+      <ul>
+        <li><Link to='/posts/post-1'>Post 1</Link></li>
+        <li><Link to='/posts/post-2'>Post 2</Link></li>
+      </ul>
     </Wrapper>
   )
 }

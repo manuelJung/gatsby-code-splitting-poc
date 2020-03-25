@@ -28,7 +28,7 @@ exports.createPages = async ({graphql, actions}) => {
   })
 
   gq.data.posts.nodes.forEach(node => actions.createPage({
-    path: `/post/${node.slug}`,
+    path: `/posts/${node.slug}`,
     component: path.resolve(__dirname, 'src/templates/Post.js'),
     context: { slug: node.slug },
     widgets: node.widgetPaths

@@ -1,5 +1,5 @@
 import * as React from 'react'
 
-export default function WidgetExample1 () {
-  return <p>Hello from WidgetExample1</p>
+export default function Headline ({label}) {
+  return <h1>{label}</h1>
 }

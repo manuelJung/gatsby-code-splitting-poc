@@ -1,11 +1,11 @@
 {
-  "slug": "post-1",
+  "slug": "post-2",
   "widgets": [
     {
       "name": "Headline",
       "id": "generic-id-1",
       "props": {
-        "label": "Blog Post 1"
+        "label": "Blog Post 2"
       }
     },{
       "name": "Paragraph",
