@@ -9,10 +9,18 @@ const path = require('path')
 
 exports.createPages = ({graphql, actions}) => {
   actions.createPage({
-    path: '/my-path',
-    component: path.resolve(__dirname, 'src/templates/TemplateA.js'),
+    path: '/',
+    component: path.resolve(__dirname, 'src/templates/Homepage.js'),
     widgets: {
-      WidgetA: path.resolve(__dirname, 'src/components/WidgetA.js')
+      WidgetExample1: path.resolve(__dirname, 'src/widgets/WidgetExample1.js'),
+      WidgetExample2: path.resolve(__dirname, 'src/widgets/WidgetExample2.js')
     }
   })
+  // actions.createPage({
+  //   path: '/my-path',
+  //   component: path.resolve(__dirname, 'src/templates/TemplateA.js'),
+  //   widgets: {
+  //     WidgetA: path.resolve(__dirname, 'src/components/WidgetA.js')
+  //   }
+  // })
 }
