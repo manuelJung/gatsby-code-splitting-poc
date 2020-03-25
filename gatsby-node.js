@@ -16,11 +16,4 @@ exports.createPages = ({graphql, actions}) => {
       WidgetExample2: path.resolve(__dirname, 'src/widgets/WidgetExample2.js')
     }
   })
-  // actions.createPage({
-  //   path: '/my-path',
-  //   component: path.resolve(__dirname, 'src/templates/TemplateA.js'),
-  //   widgets: {
-  //     WidgetA: path.resolve(__dirname, 'src/components/WidgetA.js')
-  //   }
-  // })
 }
