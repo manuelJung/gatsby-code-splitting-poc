@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{199:function(n,t,e){"use strict";e.r(t),e.d(t,"default",function(){return u});var r=e(0);function u(n){var t=n.content;return r.createElement("p",null,t)}}}]);
-//# sourceMappingURL=widget---src-widgets-paragraph-js-e4fc34162111481fb3ac.js.map
