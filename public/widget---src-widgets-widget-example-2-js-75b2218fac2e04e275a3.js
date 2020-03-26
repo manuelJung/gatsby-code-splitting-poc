@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{197:function(n,e,t){"use strict";t.r(e),t.d(e,"default",function(){return r});var o=t(0);function r(){return o.createElement("p",null,"Hello from WidgetExample2")}}}]);
+//# sourceMappingURL=widget---src-widgets-widget-example-2-js-75b2218fac2e04e275a3.js.map
