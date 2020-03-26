@@ -27,6 +27,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "log": "echo Hello",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
