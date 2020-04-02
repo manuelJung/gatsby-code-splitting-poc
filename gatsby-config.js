@@ -5,7 +5,7 @@ module.exports = {
     author: `Manuel Jung`,
   },
   plugins: [
-    // `gatsby-plugin-styled-components`,
+    `gatsby-plugin-styled-components`,
     `gatsby-transformer-json`,
     {
       resolve: `gatsby-source-filesystem`,
