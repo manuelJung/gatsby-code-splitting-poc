@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Link} from 'gatsby'
 
 export default function Homepage ({widgets}) {
+  // console.log(widgets)
   return (
     <Wrapper className='Homepage'>
       <h1>Gatsby Code-Splitting POC</h1>

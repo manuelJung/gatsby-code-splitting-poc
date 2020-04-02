@@ -8,15 +8,16 @@ const path = require('path')
 // You can delete this file if you're not using it
 
 exports.createPages = async ({graphql, actions}) => {
-  const gq = await graphql(`{
-    posts:allPostsJson {
-      nodes {
-        slug
-        widgets
-        widgetPaths
-      }
-    }
-  }`)
+  // actions.myAction('it works')
+  // const gq = await graphql(`{
+  //   posts:allPostsJson {
+  //     nodes {
+  //       slug
+  //       widgets
+  //       widgetPaths
+  //     }
+  //   }
+  // }`)
 
   /**
    * Basic example that adds widgets manually. Widgets are added the same way
@@ -25,24 +26,32 @@ exports.createPages = async ({graphql, actions}) => {
   actions.createPage({
     path: '/',
     component: path.resolve(__dirname, 'src/templates/Homepage.js'),
-    widgets: {
-      WidgetExample1: path.resolve(__dirname, 'src/widgets/WidgetExample1.js'),
-      WidgetExample2: path.resolve(__dirname, 'src/widgets/WidgetExample2.js')
-    }
   })
 
-  /**
-   * More advanced example that generated posts. The widget-paths are created
-   * by our field-extension defined in 'createSchemaCustomization'
-   * These widget paths are mapped to react components that are accessible in
-   * the page-component
-   */
-  gq.data.posts.nodes.forEach(node => actions.createPage({
-    path: `/posts/${node.slug}`,
-    component: path.resolve(__dirname, 'src/templates/Post.js'),
-    context: { slug: node.slug },
-    widgets: node.widgetPaths
-  }))
+  actions.addModuleToPageDependencies({
+    path: '/',
+    module: path.resolve(__dirname, 'src/widgets/WidgetExample1.js'),
+    identifier: 'WidgetExample1'
+  })
+
+  actions.addModuleToPageDependencies({
+    path: '/',
+    module: path.resolve(__dirname, 'src/widgets/WidgetExample2.js'),
+    identifier: 'WidgetExample2'
+  })
+
+  // /**
+  //  * More advanced example that generated posts. The widget-paths are created
+  //  * by our field-extension defined in 'createSchemaCustomization'
+  //  * These widget paths are mapped to react components that are accessible in
+  //  * the page-component
+  //  */
+  // gq.data.posts.nodes.forEach(node => actions.createPage({
+  //   path: `/posts/${node.slug}`,
+  //   component: path.resolve(__dirname, 'src/templates/Post.js'),
+  //   context: { slug: node.slug },
+  //   widgets: node.widgetPaths
+  // }))
 }
 
 /**
