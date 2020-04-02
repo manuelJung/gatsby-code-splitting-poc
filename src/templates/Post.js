@@ -10,7 +10,7 @@ export default function Post (props) {
       {props.data.post.widgets.map(widget => {
         const Widget = props.widgets[widget.name]
         if(!Widget) return <p>widget {widget.name} not found</p>
-        return <Widget {...widget.props}/>
+        return <Widget key={widget.id} {...widget.props}/>
       })}
     </div>
   )

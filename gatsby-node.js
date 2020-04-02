@@ -1,23 +1,14 @@
 const path = require('path')
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
-// You can delete this file if you're not using it
 
 exports.createPages = async ({graphql, actions}) => {
-  // actions.myAction('it works')
-  // const gq = await graphql(`{
-  //   posts:allPostsJson {
-  //     nodes {
-  //       slug
-  //       widgets
-  //       widgetPaths
-  //     }
-  //   }
-  // }`)
+  const gq = await graphql(`{
+    posts:allPostsJson {
+      nodes {
+        slug
+        widgetResolvers
+      }
+    }
+  }`)
 
   /**
    * Basic example that adds widgets manually. Widgets are added the same way
@@ -40,18 +31,32 @@ exports.createPages = async ({graphql, actions}) => {
     identifier: 'WidgetExample2'
   })
 
-  // /**
-  //  * More advanced example that generated posts. The widget-paths are created
-  //  * by our field-extension defined in 'createSchemaCustomization'
-  //  * These widget paths are mapped to react components that are accessible in
-  //  * the page-component
-  //  */
-  // gq.data.posts.nodes.forEach(node => actions.createPage({
-  //   path: `/posts/${node.slug}`,
-  //   component: path.resolve(__dirname, 'src/templates/Post.js'),
-  //   context: { slug: node.slug },
-  //   widgets: node.widgetPaths
-  // }))
+  /**
+   * More advanced example that generated posts. The widget-paths are created
+   * by our field-extension defined in 'createSchemaCustomization'
+   * These widget paths are mapped to react components that are accessible in
+   * the page-component
+   */
+  gq.data.posts.nodes.forEach(node => actions.createPage({
+    path: `/posts/${node.slug}`,
+    component: path.resolve(__dirname, 'src/templates/Post.js'),
+    context: { slug: node.slug },
+    widgets: node.widgetPaths
+  }))
+  gq.data.posts.nodes.forEach(node => {
+    actions.createPage({
+      path: `/posts/${node.slug}`,
+      component: path.resolve(__dirname, 'src/templates/Post.js'),
+      context: { slug: node.slug },
+    })
+    node.widgetResolvers.forEach(resolver => {
+      actions.addModuleToPageDependencies({
+        path: `/posts/${node.slug}`,
+        module: resolver.path,
+        identifier: resolver.name
+      })
+    })
+  })
 }
 
 /**
@@ -61,15 +66,14 @@ exports.createPages = async ({graphql, actions}) => {
 exports.createSchemaCustomization = ({ actions, cache }) => {
   const { createFieldExtension, createTypes } = actions
   createFieldExtension({
-    name: 'WidgetPaths',
+    name: 'WidgetResolvers',
     extend: () => ({
       resolve: async source => {
         if(!source.widgets) return null
-        let paths = {}
-        source.widgets.forEach(({name}) => {
-          paths[name] = path.resolve(__dirname, `src/widgets/${name}.js`)
-        })
-        return paths
+        return source.widgets.map(widget => ({
+          name: widget.name,
+          path: path.resolve(__dirname, `src/widgets/${widget.name}.js`)
+        }))
       }
     })
   })
@@ -77,7 +81,7 @@ exports.createSchemaCustomization = ({ actions, cache }) => {
   const typeDefs = `
     type PostsJson implements Node {
       widgets: JSON,
-      widgetPaths: JSON @WidgetPaths
+      widgetResolvers: JSON @WidgetResolvers
     }
   `
   createTypes(typeDefs)
