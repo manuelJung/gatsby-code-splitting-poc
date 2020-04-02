@@ -61,7 +61,7 @@ exports.createPages = async ({graphql, actions}) => {
 
 /**
  * I've create an helper resolver for the widget paths. That way
- * I don't have to calculate the widgets each time (WidgetPaths)
+ * I don't have to calculate the widgets each time (WidgetResolvers)
  */
 exports.createSchemaCustomization = ({ actions, cache }) => {
   const { createFieldExtension, createTypes } = actions

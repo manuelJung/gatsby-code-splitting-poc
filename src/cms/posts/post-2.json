@@ -13,6 +13,12 @@
       "props": {
         "content": "This content is displayed by the widget 'src/widgets/Paragraph'"
       }
+    },{
+      "name": "Image",
+      "id": "generic-id-3",
+      "props": {
+        "src": "https://picsum.photos/300/300"
+      }
     }
   ]
 }
